@@ -1,0 +1,10 @@
+#c_canvas{
+    outline-style: solid;
+    outline-color: #131313;
+    outline-width: thin;
+}
+#stopButton{
+    outline-width: thin;
+    outline-style: dashed;
+    outline-color: #131313;
+}
