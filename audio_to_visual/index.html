@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="fileWrapper" class="file_wrapper">
+            <div id="info">
+                Nothing to show
+            </div>
+            <label for="sampleRateEditor">sample rate:</label>
+            <input type="number" id="sampleRateEditor" min="50" value="20"/>
+            <br>
+
+            <label for="aEditor">arg a:</label>
+            <input type="number" id="aEditor" min="0" value="50"/>
+            <br>
+
+            <label for="bEditor">arg b:</label>
+            <input type="number" id="bEditor" min="1" value="50"/>
+            <br>
+
+            <label for="gapMultiplierEditor">gap multiplier:</label>
+            <input type="number" id="gapMultiplierEditor" min="0" value="1.5"/>
+            <br>
+
+            <label for="minCircleSizeEditor">minimum circle size:</label>
+            <input type="number" id="minCircleSizeEditor" min="1" value="1"/>
+            <br>
+
+            <label for="maxCircleSizeEditor">maximum circle size:</label>
+            <input type="number" id="maxCircleSizeEditor" min="2" value="100"/>
+            <br>
+
+            <label for="uploadedFile">Drag&drop or select a file to play:</label>
+            <input type="file" id="uploadedFile"/>
+            <br>
+        </div>
+        <div id="visualizer_wrapper">
+            <canvas id='canvas' width="800" height="350"></canvas>
+        </div>
+        <div id="stopButton">停止 </div>
+        <div id="visual_container">
+            <canvas id="c_canvas" width="1280" height="800"></canvas>
+            <ul id="list">
+                <li>nothing here.</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="audio_to_visual.js"></script>
+</body>
+</html>

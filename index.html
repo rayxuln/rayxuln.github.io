@@ -2,55 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HelloWorld</title>
-
-    <link type="text/css" rel="stylesheet" href="style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数绘图语言解释器</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <div id="wrapper">
-        <div id="fileWrapper" class="file_wrapper">
-            <div id="info">
-                Nothing to show
-            </div>
-            <label for="sampleRateEditor">sample rate:</label>
-            <input type="number" id="sampleRateEditor" min="50" value="20"/>
-            <br>
 
-            <label for="aEditor">arg a:</label>
-            <input type="number" id="aEditor" min="0" value="50"/>
-            <br>
+    <div id="main-container">
+<textarea id="code-container">
+origin is (250, 200); -- 设置原点的偏移量
+rot is pi/6;          -- 设置旋转角度
+scale is (2, 1);      -- 设置横、纵坐标比例
+for t from -100 to 100 step 1 draw (t, 0); -- 横坐标
+for t from -100 to 100 step 1 draw (0, t); -- 纵坐标
+scale is (200, 100);  -- 设置横、纵坐标比例
+for t from 0 to 2*pi step pi/50 draw (cos(t), sin(t));
+</textarea>
 
-            <label for="bEditor">arg b:</label>
-            <input type="number" id="bEditor" min="1" value="50"/>
-            <br>
-
-            <label for="gapMultiplierEditor">gap multiplier:</label>
-            <input type="number" id="gapMultiplierEditor" min="0" value="1.5"/>
-            <br>
-
-            <label for="minCircleSizeEditor">minimum circle size:</label>
-            <input type="number" id="minCircleSizeEditor" min="1" value="1"/>
-            <br>
-
-            <label for="maxCircleSizeEditor">maximum circle size:</label>
-            <input type="number" id="maxCircleSizeEditor" min="2" value="100"/>
-            <br>
-
-            <label for="uploadedFile">Drag&drop or select a file to play:</label>
-            <input type="file" id="uploadedFile"/>
-            <br>
+        <div id="button-container">
+            <button id="eval-button" class="vertical-center"> 执行 </button>
         </div>
-        <div id="visualizer_wrapper">
-            <canvas id='canvas' width="800" height="350"></canvas>
-        </div>
-        <div id="stopButton">停止 </div>
-        <div id="visual_container">
-            <canvas id="c_canvas" width="1280" height="800"></canvas>
-            <ul id="list">
-                <li>nothing here.</li>
-            </ul>
+
+        <div id="canvas-container">
+            <canvas id="canvas" width="5" height="5" ></canvas>
         </div>
     </div>
-    <script type="text/javascript" src="audio_to_visual.js"></script>
+    
 </body>
+<script type="module">
+    import App from "./App.js"
+    var canvas_container = document.getElementById("canvas-container");
+    var canvas = document.getElementById("canvas");
+    var app = new App(canvas.getContext("2d"));
+
+    function resize_canvas(){
+        let w = canvas.clientWidth
+        let h = canvas.clientHeight
+        canvas.width = w
+        canvas.height = h
+    }
+
+    window.onload = function(){  
+        var btn = document.getElementById("eval-button"); 
+
+        resize_canvas()
+
+        app.init()
+        btn.onclick =function(){  
+            app.eval()
+        } 
+
+        
+    }
+
+    window.onresize = function(){
+        resize_canvas()
+
+        app.retain_image_data()
+        app.eval()
+    }
+</script>
 </html>
